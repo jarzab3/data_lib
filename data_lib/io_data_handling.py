@@ -5,11 +5,9 @@ __license__ = "MIT"
 __maintainer__ = "Adam Jarzebak"
 __email__ = "adam@jarzebak.eu"
 """
-Top level function helping with reading different types of files. Counting, matching and other helpers regards to data 
-science.
+Top level function helping with reading different types of files. Counting, matching and other helpers regards to data science.
 """
 import csv
-# from time import sleep
 
 
 def read_tsv_file(filename: str) -> list:
@@ -33,6 +31,7 @@ def display_column_from_tsv_file(data: list, column: int) -> None:
     :param column:
     :return:
     """
+    assert 0 > column < int, "No such column, please ensure that index is correct"
     for row in data:
         try:
             print(row[column])
@@ -45,18 +44,21 @@ def check_for_empty_field_in_column(data: list, column: int, print_all_row: bool
     Function is retrieving last date when update was performed
     :return: last update info : str
     """
+    total_empty_fields = 0
     for row_index, row in enumerate(data):
         try:
             if row[column] == "":
                 if print_all_row:
                     print("Empty row in index: {}.\nContent: {}".format(row_index, row))
                 else:
-                    print("Empty row in index: {}".format(row_index))
+                    total_empty_fields += 1
         except IndexError:
             print("No such column")
+    print("Summary: {} empty fields in dataset. Total length: {}".format(
+        total_number_fields, len(data)))
 
 
-def count_unique_value_in_column(data: list, column: int):
+def count_unique_value_in_column(data: list, column: int) -> int:
     """
     Count unique number of items in column. If column number is incorrect returns -1
     :param data:
@@ -70,3 +72,24 @@ def count_unique_value_in_column(data: list, column: int):
         unique_values.add(row[column])
     return len(unique_values)
 
+
+payload = {'_ctl4%3A_ctl1%3AgrpCountry:': 'radLocatedIn', '_ctl4%3A_ctl1%3AchkAll': 'on',
+           '_ctl4:_ctl1:chkAll': 'on', '_ctl4:_ctl1:chkEngland': 'on',
+           '_ctl4:_ctl1:chkScotland': 'on',
+           '_ctl4:_ctl1:chkWales': 'on',
+           '_ctl4:_ctl1:chkNorthernIreland': 'on',
+           '_ctl4:_ctl1:chkOther': 'on',
+           '_ctl4:_ctl1:dropCounty': '0',
+           '_ctl4:_ctl1:grdScotland:_ctl5:RAVE0001.x': '19',
+           '_ctl4:_ctl1:grdScotland:_ctl5:RAVE0001.y': '14',
+           '_ctl4:_ctl1:popView:ValueReturned': 'false',
+           '_ctl4:_ctl1:popView:HiddenModal': 'True',
+           '_ctl4:_ctl1:popView:HiddenL': '500',
+           '_ctl4:_ctl1:popView:HiddenT': '500',
+           '_ctl4:_ctl1:popView:HiddenH': '700',
+           '_ctl4:_ctl1:popView:HiddenW': '600',
+           '_ctl4:_ctl1:popView:HiddenCenter': 'True',
+           '_ctl4:_ctl1:popView:HiddenSizeable': 'no',
+           '_ctl4:_ctl1:popView:HiddenPopupName': 'Register Details',
+           '_ctl4:_ctl1:popView:HiddenAllowScrollbars': 'no'
+           }
