@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="data_lib",
-    version="1.0.1",
+    version="1.0.2",
     author="Adam Jarzebak",
     author_email="adam@jarzebak.eu",
     description="Data handling and manipulation library",

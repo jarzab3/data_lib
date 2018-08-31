@@ -48,7 +48,7 @@ This package is deployed on pip global server. In order to make new release, ple
 ```
 In case of there is an existing buid it can be removed by follwoing command:
 1) rm -r build/ dist/ data_lib.egg-info
-2) python setup.py sdist bdist_wheel
+2) python3 setup.py sdist bdist_wheel
 3) twine upload --repository pypi dist/*     Note using this command make sure you have installed twine and config file.
 
 ```
